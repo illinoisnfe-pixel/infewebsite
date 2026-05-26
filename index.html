@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Illinois Network of Forensic Examiners</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Source+Serif+4:wght@300;400;600&family=Overpass+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#071126;
+  --navy-soft:#12314f;
+  --muted-blue:#5f6b7a;
+  --section-blue:#d9eef7;
+  --section-light:#eef8fc;
+  --section-muted:#cfdde3;
+  --white:#ffffff;
+  --text:#0b1224;
+  --muted:#5f6b7a;
+  --rule:rgba(11,18,36,0.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:#dfecef;
+  color:var(--text);
+  font-family:'Source Serif 4', Georgia, serif;
+  overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:68px;
+  z-index:300;
+  background:var(--navy);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 56px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.nav-left{display:flex;align-items:center;gap:14px}
+.logo{
+  width:44px;
+  height:44px;
+  border-radius:24px;
+  background:#d7e6ec;
+  object-fit:contain;
+  border:1px solid rgba(255,255,255,0.15);
+}
+.nav-wordmark{
+  font-family:'Overpass Mono', monospace;
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  line-height:1.35;
+  text-transform:uppercase;
+  color:#fff;
+  border-left:1px solid rgba(255,255,255,.18);
+  padding-left:14px;
+}
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:32px;
+}
+.nav-links a,
+.nav-action{
+  font-family:'Overpass Mono', monospace;
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  text-decoration:none;
+}
+.nav-links a{color:rgba(255,255,255,.78)}
+.nav-links a:hover{color:#fff}
+.nav-action{
+  color:#fff;
+  border:1px solid rgba(255,255,255,.22);
+  padding:9px 18px;
+}
+
+/* HERO */
+.hero{
+  min-height:88vh;
+  background:#5f6b7a;
+  color:#fff;
+  position:relative;
+  display:grid;
+  place-items:center;
+  padding:120px 60px 80px;
+  overflow:hidden;
+}
+.hero::before{
+  content:"L";
+  position:absolute;
+  bottom:-1%;
+  right:4%;
+  font-family:'Playfair Display', serif;
+  font-size:clamp(220px,22vw,420px);
+  font-weight:900;
+  color:rgba(255,255,255,.055);
+  line-height:1;
+  z-index:0;
+  pointer-events:none;
+}
+.hero::after{
+  content:"I";
+  position:absolute;
+  top:4%;
+  left:50%;
+  font-family:'Playfair Display', serif;
+  font-size:clamp(220px,22vw,420px);
+  font-weight:900;
+  color:rgba(255,255,255,.055);
+  line-height:1;
+  z-index:0;
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  max-width:1160px;
+  width:100%;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:70px;
+  align-items:center;
+}
+.hero h1{
+  font-family:'Playfair Display', serif;
+  font-size:clamp(46px,7vw,88px);
+  line-height:.96;
+  font-weight:900;
+  color:#fff;
+  letter-spacing:-.03em;
+  margin-bottom:28px;
+}
+.hero h1 em{
+  display:block;
+  font-weight:400;
+  color:rgba(255,255,255,.72);
+}
+.hero p{
+  max-width:420px;
+  color:rgba(255,255,255,.76);
+  font-size:1.08rem;
+  line-height:1.8;
+}
+.hero-card{
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:28px;
+  background:linear-gradient(180deg,rgba(7,18,45,.98),rgba(4,10,28,1));
+  padding:16px;
+  box-shadow:0 25px 45px rgba(0,0,0,.18);
+  max-width:250px;
+  aspect-ratio:1/1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:2;
+  transform:translate(clamp(0px,3vw,45px),35px);
+}
+.hero-card-logo{
+  display:flex;
+align-items:center;
+  justify-content:center;
+width:100%;
+}
+.hero-logo{
+  width:260px;
+  height:auto;
+object-fit:contain
+filter:drop-shadow(0 18px 35px rgba(0, 0, 0, .18));
+  display:block;
+}
+
+/* SHARED SECTION STRUCTURE */
+.section{
+  padding:96px 60px;
+  background:var(--section-light);
+}
+.section-inner{
+  max-width:1180px;
+  margin:0 auto;
+}
+.section-header{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:60px;
+  align-items:end;
+  margin-bottom:46px;
+}
+.section-label,
+.card-kicker,
+.form-label{
+  font-family:'Overpass Mono', monospace;
+  font-size:.58rem;
+  font-weight:600;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+.section-label{
+  color:var(--navy);
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.section-label::before{
+  content:"";
+  width:28px;
+  height:2px;
+  background:var(--navy);
+}
+.section-title{
+  font-family:'Playfair Display', serif;
+  font-size:clamp(34px,4.3vw,58px);
+  line-height:1;
+  font-weight:900;
+  color:var(--navy);
+}
+.section-title em{
+  color:var(--navy);
+  font-weight:400;
+}
+.section-intro{
+  color:rgba(11,18,36,.70);
+  line-height:1.8;
+}
+
+/* CARD SYSTEM — used by Sections 2, 3, 4, and 5 */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(11,18,36,.12);
+  border:1px solid rgba(11,18,36,.12);
+  align-items:stretch;
+}
+.card-link{
+  display:block;
+  color:inherit;
+  text-decoration:none;
+  height:100%;
+}
+.card-link:visited,
+.card-link:hover,
+.card-link:focus{
+  text-decoration:none;
+}
+.info-card{
+  background:#fff;
+  color:var(--navy);
+  padding:34px 30px;
+  min-height:320px;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.info-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 42px rgba(0,0,0,.12);
+}
+.card-kicker{
+  color:#5f6b7a;
+  margin-bottom:18px;
+}
+.info-card h3{
+  font-family:'Playfair Display', serif;
+  font-size:1.45rem;
+  line-height:1.15;
+  color:var(--navy);
+  margin-bottom:14px;
+}
+.info-card p{
+  color:rgba(11,18,36,.72);
+  font-size:.95rem;
+  line-height:1.7;
+}
+.card-cta{
+  display:inline-block;
+  margin-top:22px;
+  padding:10px 18px;
+  border:1px solid rgba(11,18,36,.16);
+  font-family:'Overpass Mono', monospace;
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--navy);
+  text-decoration:none;
+  line-height:1;
+}
+
+/* SECTION COLOR VARIATIONS */
+#trainings{
+  background:var(--section-light);
+}
+#trainings .card-grid{
+  grid-template-columns:1fr;
+  max-width:520px;
+  margin:auto;
+}
+#trainings .info-card{
+  background:var(--navy);
+  color:#fff;
+}
+#trainings .info-card h3,
+#trainings .info-card p,
+#trainings .card-kicker,
+#trainings .card-cta{
+  color:#fff;
+}
+#trainings .card-cta{
+  border-color:rgba(255,255,255,.38);
+}
+
+#resources{
+  background:var(--section-light);
+}
+
+/* SECTION 3 — muted background, white cards, navy writing */
+#partners{
+  background:var(--section-muted);
+}
+#partners .info-card{
+  background:#ffffff;
+  color:var(--navy);
+}
+#partners .info-card h3,
+#partners .info-card p,
+#partners .card-kicker,
+#partners .card-cta{
+  color:var(--navy);
+}
+#partners .card-cta{
+  border:1px solid rgba(11,18,36,.16);
+}
+
+#legislation{
+  background:var(--section-light);
+}
+
+/* SECTION 5 */
+#submit{
+  background:var(--navy);
+  color:#fff;
+}
+#submit .section-label,
+#submit .section-title,
+#submit .section-title em,
+#submit .section-intro{
+  color:#fff;
+}
+#submit .section-label::before{
+  background:#fff;
+}
+#submit .card-grid{
+  grid-template-columns:1fr;
+  max-width:560px;
+  margin:auto;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.14);
+}
+#submit .info-card{
+  background:#fff;
+  color:var(--navy);
+}
+#submit .info-card h3,
+#submit .info-card p,
+#submit .card-kicker,
+#submit .card-cta{
+  color:var(--navy);
+}
+
+/* FOOTER */
+footer{
+  background:var(--navy);
+  padding:36px 60px;
+  color:rgba(255,255,255,.50);
+  text-align:center;
+}
+footer p{
+  font-family:'Overpass Mono', monospace;
+  font-size:.55rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .hero{
+    padding:108px 28px 70px;
+  }
+  .hero-inner,
+  .section-header{
+    grid-template-columns:1fr;
+  }
+  .hero-card{
+    margin:0 auto;
+    transform:none;
+  }
+  .section{
+    padding:76px 28px;
+  }
+  .card-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-left">
+    <img src="logo.png" alt="Illinois Network of Forensic Examiners Logo" class="logo">
+    <div class="nav-wordmark">Illinois Network<br>of Forensic Examiners</div>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#trainings">Trainings</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#legislation">Legislation</a></li>
+  </ul>
+
+  <a href="#submit" class="nav-action">Submit</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>Training.<br>Resources.<br><em>Connection.</em></h1>
+      <p>Supporting trauma-informed forensic care across Illinois.</p>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-logo">
+        <img src="logo.png" alt="INFE Logo" class="hero-logo">
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<section class="section" id="trainings">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-label">01 / Trainings</div>
+        <h2 class="section-title">Learn, practice,<br><em>and grow.</em></h2>
+      </div>
+
+      <p class="section-intro">
+        Browse upcoming statewide, regional, and virtual training opportunities relevant to forensic care.
+      </p>
+    </div>
+
+    <div class="card-grid">
+      <a href="https://docs.google.com/document/d/17lb0OVc6Lp7JguW9Frn661RDSxJVU-IELS42PqFU7Fc/edit?usp=sharing" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Training Calendar</div>
+          <h3>View Upcoming Trainings</h3>
+          <p>
+            Open the current training list for upcoming statewide, regional, and virtual opportunities.
+          </p>
+          <div class="card-cta">View Trainings →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="resources">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-label">02 / Resources</div>
+        <h2 class="section-title">Protocols, Guidance,<br><em>& Organizations.</em></h2>
+      </div>
+
+      <p class="section-intro">
+        A curated resource area for national protocols, multidisciplinary guidance, toolkits, and professional organizations.
+      </p>
+    </div>
+
+    <div class="card-grid">
+      <a href="https://www.justice.gov/ovw/media/1367191/dl?inline" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">National Protocol</div>
+          <h3>National Protocol for Sexual Assault Medical Forensic Examinations Adults/Adolescents</h3>
+          <p>National guidance for adult and adolescent sexual assault medical forensic examinations.</p>
+          <div class="card-cta">Open Protocol →</div>
+        </div>
+      </a>
+
+      <a href="https://www.justice.gov/ovw/file/846856/dl" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">National Protocol</div>
+          <h3>National Protocol for Sexual Abuse Medical Forensic Examinations Pediatric</h3>
+          <p>National pediatric protocol resources for child sexual abuse medical forensic examinations.</p>
+          <div class="card-cta">Open Protocol →</div>
+        </div>
+      </a>
+
+      <a href="https://www.ojp.gov/pdffiles1/nij/250384.pdf" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Best Practice</div>
+          <h3>National Best Practices for Sexual Assault Kits</h3>
+          <p>Best practice approaches to coordinated evidence collection across medical, legal, and advocacy disciplines.</p>
+          <div class="card-cta">View Guidance →</div>
+        </div>
+      </a>
+
+      <a href="https://www.luriechildrens.org/en/for-healthcare-professionals/child-maltreatment-toolkit/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Toolkit</div>
+          <h3>Child Maltreatment Toolkit 3rd Edition, 2025</h3>
+          <p>Practical tools and reference materials related to child maltreatment recognition, response, and documentation.</p>
+          <div class="card-cta">Open Toolkit →</div>
+        </div>
+      </a>
+
+      <a href="https://evawintl.org/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Organization</div>
+          <h3>End Violence Against Women International (EVAWI)</h3>
+          <p>Training and resources supporting multidisciplinary, victim-centered responses to sexual assault and gender-based violence.</p>
+          <div class="card-cta">Visit Site →</div>
+        </div>
+      </a>
+
+      <a href="https://www.goafn.org/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Organization</div>
+          <h3>Academy of Forensic Nursing (AFN)</h3>
+          <p>Education, certification support, and professional development for forensic nurses and multidisciplinary practitioners.</p>
+          <div class="card-cta">Visit Site →</div>
+        </div>
+      </a>
+
+      <a href="https://www.ena.org/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Organization</div>
+          <h3>Emergency Nurses Association (ENA)</h3>
+          <p>Professional organization supporting emergency nurses through education, advocacy, and clinical resources.</p>
+          <div class="card-cta">Visit Site →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="partners">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-label">03 / Trusted Illinois Partners</div>
+        <h2 class="section-title">Trusted Illinois<br><em>Partners.</em></h2>
+      </div>
+
+      <p class="section-intro">
+        Connect directly to Illinois agencies and organizations supporting forensic care, advocacy, child protection, hospital response, and survivor-centered services.
+      </p>
+    </div>
+
+    <div class="card-grid">
+      <a href="https://illinoisattorneygeneral.gov/safer-communities/Responding-to-Sexual-Assault/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">State Program</div>
+          <h3>Office of the Illinois Attorney General — SANE Program</h3>
+          <p>Official program guidance, training resources, and statewide forensic nursing support.</p>
+          <div class="card-cta">Visit Site →</div>
+        </div>
+      </a>
+
+      <a href="https://icasa.org/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Advocacy</div>
+          <h3>Illinois Coalition Against Sexual Assault (ICASA)</h3>
+          <p>Statewide advocacy network supporting crisis centers and survivor services.</p>
+          <div class="card-cta">Visit Site →</div>
+        </div>
+      </a>
+
+      <a href="https://childrensadvocacycentersofillinois.org/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Pediatrics</div>
+          <h3>Children’s Advocacy Centers of Illinois (CACI)</h3>
+          <p>Multidisciplinary response and services for children impacted by abuse.</p>
+          <div class="card-cta">Visit Site →</div>
+        </div>
+      </a>
+
+      <a href="https://dcfs.illinois.gov/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Child Protection</div>
+          <h3>Illinois Department of Children and Family Services (DCFS)</h3>
+          <p>Reporting, investigation, and child protection services across Illinois.</p>
+          <div class="card-cta">Visit Site →</div>
+        </div>
+      </a>
+
+      <a href="https://ilaging.illinois.gov/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Adult Services</div>
+          <h3>Illinois Department on Aging (IDoA)</h3>
+          <p>Adult protective services and support resources for vulnerable adults in Illinois.</p>
+          <div class="card-cta">Visit Site →</div>
+        </div>
+      </a>
+
+      <a href="https://www.team-iha.org/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Hospitals</div>
+          <h3>Illinois Health and Hospital Association (IHA)</h3>
+          <p>Statewide hospital association supporting Illinois hospitals and health systems.</p>
+          <div class="card-cta">Visit Site →</div>
+        </div>
+      </a>
+
+      <a href="https://dph.illinois.gov/topics-services/health-care-regulation/hospitals/saseta/hospital-listings.html" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Public Health</div>
+          <h3>Illinois Department of Public Health (IDPH)</h3>
+          <p>Includes SASETA hospital listings for sexual assault treatment services across Illinois.</p>
+          <div class="card-cta">View Listings →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="legislation">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-label">04 / Illinois Statutes & Rules</div>
+        <h2 class="section-title">Illinois law<br><em>guiding care.</em></h2>
+      </div>
+
+      <p class="section-intro">
+        Illinois statutes and administrative rules guiding medical forensic care, mandated reporting, hospital response, and survivor-centered services.
+      </p>
+    </div>
+
+    <div class="card-grid">
+      <a href="https://www.ilga.gov/" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Legislative Resource</div>
+          <h3>Illinois Legislative Resources</h3>
+          <p>Official Illinois General Assembly resources, including statutes, administrative rules, witness slips, bill status, and legislative information.</p>
+          <div class="card-cta">Visit ILGA.gov →</div>
+        </div>
+      </a>
+
+      <a href="https://www.ilga.gov/Legislation/ILCS/Articles?ActID=1531&ChapterID=35" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Illinois Statute</div>
+          <h3>Sexual Assault Survivors Emergency Treatment Act (SASETA)</h3>
+          <p>Establishes hospital responsibilities for medical forensic examinations, consent, transfer, evidence collection, and survivor care in Illinois.</p>
+          <div class="card-cta">View Statute →</div>
+        </div>
+      </a>
+
+      <a href="https://www.ilga.gov/Legislation/ILCS/Articles?ActID=3731&ChapterID=54" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Illinois Statute</div>
+          <h3>Sexual Assault Incident Procedure Act (SAIPA)</h3>
+          <p>Outlines law enforcement responsibilities, survivor rights, and required procedures following a sexual assault report in Illinois.</p>
+          <div class="card-cta">View Statute →</div>
+        </div>
+      </a>
+
+      <a href="https://www.ilga.gov/Legislation/ILCS/Articles?ActID=1460&ChapterID=32" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Mandated Reporting</div>
+          <h3>Abused and Neglected Child Reporting Act (ANCRA)</h3>
+          <p>Defines mandated reporting requirements, protections, and procedures for suspected child abuse and neglect in Illinois.</p>
+          <div class="card-cta">View Statute →</div>
+        </div>
+      </a>
+
+      <a href="https://www.ilga.gov/agencies/JCAR/Sections?PartID=07700545&TitleDescription=TITLE%2077:%20PUBLIC%20HEALTH" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Administrative Rule</div>
+          <h3>77 Ill. Adm. Code 545</h3>
+          <p>Administrative rules outlining hospital responsibilities for sexual assault treatment, transfer, pediatric care, and compliance in Illinois.</p>
+          <div class="card-cta">View Rules →</div>
+        </div>
+      </a>
+
+      <a href="#" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Updates</div>
+          <h3>Legislative Updates</h3>
+          <p>Updates on Illinois legislation and rule changes impacting forensic care, hospital response, and survivor services.</p>
+          <div class="card-cta">View Updates →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="submit">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-label">05 / Help Build the Network</div>
+        <h2 class="section-title">Contribute to<br><em>the network.</em></h2>
+      </div>
+
+      <p class="section-intro">
+        Submit trainings, resources, events, or mentorship opportunities for review and possible inclusion in the Illinois Network of Forensic Examiners.
+      </p>
+    </div>
+
+    <div class="card-grid">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfubBI9Q8AWtIjx6rjTBcIcS3I29r8IShJ1k5L-aPgmsbJAGg/viewform?usp=publish-editor" target="_blank" class="card-link">
+        <div class="info-card">
+          <div class="card-kicker">Submission Portal</div>
+          <h3>Submit Information for Review</h3>
+          <p>
+            Use the submission form to recommend trainings, resources, organizations, or mentorship opportunities for possible inclusion in the network.
+          </p>
+          <div class="card-cta">Open Submission Form →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p> 2026 Illinois Network of Forensic Examiners · Connecting professionals across Illinois</p>
+</footer>
+
+</body>
+</html>
